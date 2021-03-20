@@ -1,0 +1,2 @@
+[18-Jan-2021 21:08:53 America/Boise] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 7.2.5". You are running 7.0.33. in /home1/dupmnvmy/public_html/vendor/composer/platform_check.php on line 24
+[18-Jan-2021 21:11:41 America/Boise] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 7.2.5". You are running 7.0.33. in /home1/dupmnvmy/public_html/vendor/composer/platform_check.php on line 24

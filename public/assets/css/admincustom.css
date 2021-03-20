@@ -1,0 +1,221 @@
+
+/* ---------css_loading-------- */
+#loading{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  background-color: rgba(0,0,0,0.1);
+  display: none;
+  z-index: 99;
+}
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-top:200px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #009900 transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* ---------------------------------------- */
+.fs-20{
+font-size: 20px;
+}
+.fs-26{font-size: 26px;}
+select,input,button{
+  outline: none!important;
+}
+
+.upload_post_image, .upload_post_image_sub {
+  padding-left: 0px;
+  margin: 0px;
+}
+.upload_post_image_item, .upload_post_image_item_sub {
+  display: inline-block;
+  list-style-type: none;
+  width: 70px;
+  margin: 10px 10px;
+}
+
+.btn_transparent{
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+.pos_rel{
+  position: relative;
+}
+.uploaded_game_image{
+  margin: auto;
+  position: absolute;
+  top: 0px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  vertical-align: middle;
+  max-width: 90px;
+  max-height: 70px;
+  width: auto;
+  height: auto;
+}
+.btn_post_img_delete, .btn_post_img_delete_sub{
+  border: none;
+  background: transparent;
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  outline: none;
+  box-shadow: none;
+  color: red;
+  z-index: 99;
+}
+
+.game_img_wrap{
+  width: 90px;
+  height: 70px;
+  border: 1px solid #dedede;
+}
+.alert_boarder{
+  border-color: red;
+}
+
+.select_game_status{
+  border:none;
+  background-color: transparent;
+}
+.btn_category_action{
+position: absolute;
+right: 0px;
+top: 0px;
+}
+.edit_category_part{
+position: absolute;
+right: 0px;
+top: 0px;
+}
+.dropdown_custom_position{
+left: -100px!important;
+}
+
+.edit_sub_category_part
+{
+position: absolute;
+right: 0px;
+top: 0px;
+}
+.border-radius-area{
+border: 1px solid #dedede;
+padding: 20px;
+}
+
+.preview_compatible_img{
+width: 60px;
+height: 60px;
+display: inline-block;
+margin-left: 40px;
+padding: 5px;
+}
+.preview_compatible_img img{
+width: 100%;
+}
+.btn_blue{
+border: 1px solid #28a745;
+background-color: #28a745;
+color: white;
+transition: 0.5s;
+}
+.btn_blue:hover{  
+background-color: white;
+color: #28a745;
+}
+.compatible_item_area{
+display: inline-block;
+background-color: #cfd6df;
+border-radius: 15px;
+padding: 5px 15px;
+}
+
+.col-red{
+color: #ee0000;
+}
+
+.col-green{
+color: #28a745;
+}
+.btn-cancel{
+border: 1px solid #848484;
+}
+.btn_edit_oasis
+{
+position: absolute;
+bottom: -40px;
+right: 10px;
+color: #209a11;
+font-weight: 600;
+font-size: 24px;
+cursor: pointer;
+font-weight: 600;
+}
+
+.admin_img_warp{
+height: 300px;
+width: 100%;
+position: relative;
+}
+.admin_img_warp video{
+margin: auto;
+position: absolute;
+top: 0px;
+left: 0;
+right: 0;
+bottom: 0;
+vertical-align: middle;
+max-width: 100%;
+max-height: 300px;
+width: auto;
+height: auto;
+}
+.admin_img_warp img{
+  margin: auto;
+  position: absolute;
+  top: 0px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  vertical-align: middle;
+  max-width: 100%;
+  max-height: 300px;
+  width: auto;
+  height: auto;
+  }
+/*  */

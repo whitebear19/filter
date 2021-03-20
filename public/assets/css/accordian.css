@@ -1,0 +1,43 @@
+
+.accordion-group {
+	padding: 1rem 0;
+  }
+  
+  .accordion-group__accordion {
+	margin: 0 0 0.25rem 0;
+  }
+  
+  .accordion-group__accordion-heading {
+	margin: 0;
+  }
+  
+  .accordion-group__accordion-btn {
+	background-color: transparent;   
+    border-width: 0.05rem;
+    display: block;
+    font-size: 1rem;
+    padding: 0.5rem 0rem;
+    color: #000;
+    text-align: left;
+	width: 100%;
+  border:none;
+  border-bottom: 1px solid #555555;
+  }
+  .accordion-group__accordion-btn:focus {
+	
+	border-color: #222222;
+	
+  }
+  
+  .accordion-group__accordion-panel {
+	border-color: transparent;
+	border-radius: 0 0 0.3rem 0.3rem;
+	border-style: solid;
+	border-width: 0 0.05rem 0.05rem 0.05rem;
+	padding: 0.5rem 1rem;
+  }
+  
+  .accordion-group__accordion-btn_expanded {
+	
+  }
+  

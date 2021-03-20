@@ -1,0 +1,8 @@
+/* company */
+.card_company_create_user{
+    width: 500px;
+    margin:20px auto;
+}
+.alert{
+    border-color: tomato;
+}

@@ -1,0 +1,144 @@
+.alert_boarder{
+    border-color: red;
+}
+.alert_boarder .CaptionCont{
+    border: 1px solid red;
+}
+button{
+    outline: none!important;
+    box-shadow: none!important;
+}
+
+/* loading */
+.lds-ring {
+    display: block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    margin-top: 300px;
+  }
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent;
+  }
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  #loading{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 999;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.2);
+    display: none;
+  }
+
+  .table_filter{
+      display: none;
+  }
+  .btn_start_scrape
+  {
+    background: #2fa013;
+    border: 1px solid #12bd14;
+    color: white;
+    padding: 0px 20px;
+    font-size: 20px;
+  }
+  .btn_download_file{
+    background: transparent;
+    border: none;
+    outline: none;
+    color: blue;
+  }
+.btn_scrapping{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.selected_row{
+  background: #1e9a07;
+  color: white;
+}
+thead{
+  background: #dedede;
+  font-weight: 600;
+}
+.table{
+  font-size: 14px;
+  background-color: #efefef;
+}
+.cnt_match,.cnt_filter{
+  color: blue;
+  font-weight: 600;
+}
+.no_result{
+  display: none;
+}
+.processing_display
+{
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+@media (min-width: 768px){
+    .id2 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+    .col-md-5 {
+        flex: 0 0 41.6666666667%;
+        max-width: 38%;
+    }
+    .part{
+        border: solid 1px;
+        border-radius: 10px;
+        padding-bottom: 15px;
+        background: #00ffc4;
+        margin-right: 15px;
+    
+    }
+    .filter_form{
+        display: flex;
+        width: 100%;
+    }
+}
+select{
+    height: 35px;
+}
+h3{
+    color: blue;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.part{
+    border: solid 1px;
+    border-radius: 10px;
+    padding-bottom: 15px;
+    background: #00ffc4;
+
+}
+
