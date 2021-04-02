@@ -239,6 +239,27 @@ jQuery(function ($) {
                 ave_qty_of_offers = (ave_qty_of_offers/adv_data.length).toFixed(3);
                 common_unit_of_measurement = get_common_unit_of_measurement();
                 get_average_price();
+
+                if(ave_price.length>0)
+                {
+                    for(let i=0;i<ave_price.length;i++)
+                    {
+                        var item = Math.abs(parseFloat(ave_price[i])-parseFloat(average_price));
+                        price_std = price_std + item*item;
+                    }
+                    price_std = (Math.sqrt(price_std/ave_price.length)).toFixed(3);
+                }
+                if ( ave_price.length % 2 == 0) 
+                {
+                    var index = ave_price.length/2;
+                    price_median = (ave_price[index] + ave_price[index+1])/2;
+                }
+                else
+                {
+                    var index = Math.round(ave_price.length/2);
+                    price_median = ave_price[index];
+                }
+                price_sharpe_ratio = (average_price/price_std).toFixed(3);
                 $(".ave_qty_of_offers").html(ave_qty_of_offers);
                 $(".common_unit_of_measurement").html(common_unit_of_measurement);
                 $(".average_days").html(average_days);
