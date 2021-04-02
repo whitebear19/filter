@@ -18,7 +18,11 @@ class CreateSettingsTable extends Migration
             $table->string('user_id')->nullable();
             $table->text('modal')->nullable();   
             $table->text('cat')->nullable();                        
-            $table->string('keyword')->nullable();                        
+            $table->string('keyword')->nullable();   
+            $table->text('adv_modal')->nullable();   
+            $table->text('adv_cat')->nullable();                        
+            $table->string('adv_keyword')->nullable();                        
+            $table->string('adv_date')->nullable();                        
             $table->timestamps();
         });
     }

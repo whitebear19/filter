@@ -105,6 +105,103 @@ thead{
   top: 20px;
   right: 20px;
 }
+.advanced_filter_wrap
+{
+  padding: 5px;
+  display: flex; 
+  border-radius: 5px;
+}
+.advanced_filter
+{
+  width: 25%;
+  padding: 10px;
+  display: inline-block;
+}
+.advanced_filter input
+{
+  height: 40px;
+  padding-left: 15px;
+}
+.btn_adv_filter
+{
+  background-color: #3ea9f5;
+  color: white;
+  font-weight: bold;
+  transition: 0.35s;
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  line-height: 18px;
+}
+.btn_adv_filter:hover
+{
+  background-color: #1775b8;
+}
+.btn_remove_rows
+{
+  background-color: #ee2222;
+  color: white;
+  transition: 0.35s;
+  font-size: 18px;  
+  line-height: 18px;
+}
+#table_advanced_W
+{
+  display: none;
+}
+#table_advanced_info
+{
+  display: none;
+}
+#table_advanced_filter
+{
+  display: none;
+}
+.btn_clear_date
+{
+  border: none;
+  background-color: transparent;
+  color: black;
+  position: absolute;
+  right: 0px;
+  top: 3px;
+}
+.btn_make_calculations
+{  
+  background: #1f9c0f;
+  border: 1px solid #1f9c0f;
+  padding: 0px 20px;
+  border-radius: 5px;
+  color: white;
+  font-size: 20px;
+}
+.wrap_chart
+{
+  display: none;
+  margin: 20px 0px;
+}
+.chart_height
+{
+  height: 500px;
+}
+.canvasjs-chart-credit
+{
+  display: none;
+}
+#chart_seller svg{
+  overflow:inherit!important;
+}
+#chart_buyer svg{
+  overflow:inherit!important;
+}
+.summary_label
+{
+  font-size: 18px;
+  width: 250px;
+}
+.summary_item
+{
+  font-size: 18px;  
+}
 @media (min-width: 768px){
     .id2 {
         flex: 0 0 25%;

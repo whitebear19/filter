@@ -10,11 +10,21 @@
     <link rel="stylesheet" href="{{asset('public/css/app.css')}}">
     <link rel="stylesheet" href="{{asset('public/assets/css/main.css')}}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/sumoselect.css') }}">
-    <script src="{{asset('public/js/app.js')}}"></script>
+    <link rel="stylesheet" href="{{ asset('public/assets/css/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/datatables.min.css') }}">
+    {{-- <script src="{{asset('public/js/app.js')}}"></script> --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('public/assets/css/jquery.loadingModal.min.css') }}">
+    <script src="{{asset('public/assets/js/jquery.min.js')}}"></script>
+    <script src="{{asset('public/assets/js/moment.min.js')}}"></script>
     <script src="{{asset('public/assets/js/jquery.loadingModal.min.js')}}"></script>
-     <script src="{{ asset('public/assets/js/main.js') }}"></script>   
-     <script src="{{ asset('public/assets/js/jquery.sumoselect.js') }}"></script>
+    <script src="{{ asset('public/assets/js/daterangepicker.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/main.js') }}"></script>   
+    <script src="{{ asset('public/assets/js/jquery.sumoselect.js') }}"></script>
+    <script src="{{ asset('public/assets/js/datatables.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/jquery.canvasjs.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/d3.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/d3pie.js') }}"></script>
+     
     
 </head>
 

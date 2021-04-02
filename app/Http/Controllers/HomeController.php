@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Compatible;
-use App\Model\Game;
-use App\Model\GameCheck;
-use App\Model\MainCategory;
 use App\Model\Setting;
 use App\Model\Current;
 use App\Model\Modal;
 use App\Model\Cat;
+use App\Model\AvdModal;
+use App\Model\AvdCat;
+use App\Model\Advanced;
 use App\Model\Todo;
 use App\User;
 use Auth;
@@ -40,6 +39,28 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    public function csvToArray($filename = '', $delimiter = ',')
+    {
+        if (!file_exists($filename) || !is_readable($filename))
+            return false;
+    
+        $header = null;
+        $data = array();
+        if (($handle = fopen($filename, 'r')) !== false)
+        {
+            while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
+            {
+                if (!$header)
+                    $header = $row;
+                else
+                    $data[] = array_combine($header, $row);
+            }
+            fclose($handle);
+        }
+    
+        return $data;
+    }
     public function index()
     {
         if (empty(Auth::user()->email_verified_at)) {
@@ -278,10 +299,193 @@ class HomeController extends Controller
                 'result' => $result,'auth' => false ,'latest_updated' => ''
             ]);
         }
-               
-        
-        
+          
+    }
 
+    public function get_advanced(Request $request)
+    {
+        $modal = $request->get("modal");
+        $cat = $request->get("cat");
+        $wordtemp = $request->get("word");    
+        $date = $request->get("date");    
+        
+        $word = explode (",", $wordtemp);
+        $result = array();
+        if(!empty($date))
+        {
+            $date_temp = explode (" - ", $date);
+            $date_start = $date_temp[0];
+            $date_end = $date_temp[1];
+            $date_start = strtotime($date_start);
+            $date_start = date('Y-m-d',$date_start);
+            $date_end = strtotime($date_end);
+            $date_end = date('Y-m-d',$date_end);
+        }
+        else
+        {
+            $date_start = "";
+            $date_end = "";
+            $date = "";
+        }
+        if(Auth::check())
+        {
+            $row = Setting::where('user_id',Auth::user()->id)->first();
+            if($row)
+            {
+                $row->adv_modal = json_encode($modal);
+                $row->adv_cat = json_encode($cat);
+                if(!empty($wordtemp))
+                {
+                    $row->adv_keyword = $wordtemp;
+                }
+                else
+                {
+                    $row->adv_keyword = "";
+                }
+                
+                $row->adv_date = $date;
+                $row->save();
+            }
+            else
+            {
+                Setting::create([
+                    'user_id' => Auth::user()->id,
+                    'adv_modal' => json_encode($modal),
+                    'adv_cat' => json_encode($cat),
+                    'adv_keyword' => $wordtemp,
+                    'adv_date' => $date,
+                ]);
+            }
+            
+            for ($i=0; $i < count($modal); $i++) {  
+                for ($j=0; $j < count($cat); $j++) { 
+                    if(!empty($wordtemp))
+                    {
+                        for ($k=0; $k < count($word); $k++) {
+                            $temprow = new Advanced();
+                            if(!empty($date_start))
+                            {
+                                $temprow = $temprow->whereBetween('start_date',[$date_start,$date_end]);
+                                $temprow = $temprow->where('modality','like','%'.$modal[$i].'%')->where('category','like','%'.$cat[$j].'%');
+                            }
+                            else
+                            {
+                                $temprow = $temprow->where('modality','like','%'.$modal[$i].'%')->where('category','like','%'.$cat[$j].'%');
+                            }
+                            
+                            $temprow = $temprow->get();
+                           
+                            foreach($temprow as $item)
+                            {
+                               
+                                $str = $item->event_description;
+                                
+                                if (str_contains(strtolower($str), strtolower($word[$k]))) { 
+                                    $temp_result = array(
+                                        'id' => $item->id,
+                                        'nog' => $item->nog,
+                                        'start_date' => $item->start_date,
+                                        'end_date' => $item->end_date,
+                                        'modality' => $item->modality,
+                                        'category' => $item->category,
+                                        'event_description' => $item->event_description,
+                                        'buyer_entity' => $item->buyer_entity,
+                                        'buyer_sub_entity' => $item->buyer_sub_entity,
+                                        'seller' => $item->seller,
+                                        'qty_of_offers' => $item->qty_of_offers,
+                                        'amount' => $item->amount,
+                                        'qty' => $item->qty,
+                                        'unit_of_measurement' => $item->unit_of_measurement,
+                                        'qty_sum' => $item->qty_sum,
+                                        'bigger_than' => $item->bigger_than,
+                                    );
+                                    $check_valid = TRUE;
+                                    foreach($result as $point)
+                                    {
+                                        if($point['id'] == $item->id)
+                                        {
+                                            $check_valid = FALSE;
+                                            break;
+                                        }
+        
+                                    }
+                                    if($check_valid)
+                                    {
+                                        array_push($result,$temp_result);
+                                    }
+                                }
+                            }                    
+                        }
+                    }    
+                    else
+                    {
+                        $temprow = new Advanced();                       
+                        if($date_start!="")
+                        {                            
+                            $temprow = $temprow->whereBetween('start_date',[$date_start,$date_end]);
+                            $temprow = $temprow->where('modality','like','%'.$modal[$i].'%')->where('category','like','%'.$cat[$j].'%');
+                        }
+                        else
+                        {
+                            $temprow = $temprow->where('modality','like','%'.$modal[$i].'%')->where('category','like','%'.$cat[$j].'%');
+                        }
+                        $temprow = $temprow->get();
+                        
+                        foreach($temprow as $item)
+                        {                               
+
+                            $temp_result = array(
+                                'id' => $item->id,
+                                'nog' => $item->nog,
+                                'start_date' => $item->start_date,
+                                'end_date' => $item->end_date,
+                                'modality' => $item->modality,
+                                'category' => $item->category,
+                                'event_description' => $item->event_description,
+                                'buyer_entity' => $item->buyer_entity,
+                                'buyer_sub_entity' => $item->buyer_sub_entity,
+                                'seller' => $item->seller,
+                                'qty_of_offers' => $item->qty_of_offers,
+                                'amount' => $item->amount,
+                                'qty' => $item->qty,
+                                'unit_of_measurement' => $item->unit_of_measurement,
+                                'qty_sum' => $item->qty_sum,
+                                'bigger_than' => $item->bigger_than,
+                                'test' => "test"
+                            );
+
+                            $check_valid = TRUE;
+
+                            foreach($result as $point)
+                            {
+                                if($point['id'] == $item->id)
+                                {
+                                    $check_valid = FALSE;
+                                    break;
+                                }
+                            }
+
+                            if($check_valid)
+                            {
+                                array_push($result,$temp_result);
+                            }
+                            
+                        }                    
+                    }  
+                }
+            }
+            
+           
+            return response()->json([
+                'result' => $result,'auth' => true,'date' => $date_start
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'result' => $result,'auth' => false
+            ]);
+        }
     }
 
     public function set_todo(Request $request)
@@ -338,6 +542,82 @@ class HomeController extends Controller
             return redirect('/login');
         }
         
+    }
+    public function advanced()
+    {
+       
+        if(Auth::check())
+        {   
+            $cat = AvdCat::all();
+            $modal = AvdModal::all();
+            $row = Setting::where('user_id',Auth::user()->id)->first();
+            if(!empty($row))
+            {
+                $set_modal = json_decode($row->adv_modal);
+                $set_cat = json_decode($row->adv_cat);
+                $set_keyword = $row->adv_keyword;
+                $set_date = $row->adv_date;
+            }
+            else
+            {
+                $set_modal = "";
+                $set_cat = "";
+                $set_keyword = "";
+                $set_date = "";
+            }
+            
+            
+            return view('advanced', compact('cat','modal','set_modal','set_cat','set_keyword','set_date'));
+        }
+        else
+        {
+            return redirect('/login');
+        }
+        
+    }
+    
+    public function uploaddata(Request $request)
+    {
+        return view('uploaddata');
+    }
+    public function uploaddata_process(Request $request)
+    {
+        
+        $file = public_path('demo3.csv');    
+        $customerArr = $this->csvToArray($file);
+        
+        for ($i = 0; $i < count($customerArr); $i++)
+        {                        
+            $date_start = strtotime($customerArr[$i]['Start_date']);
+            $date_start = date('Y-m-d',$date_start);
+
+            $date_end = strtotime($customerArr[$i]['End_date']);
+            $date_end = date('Y-m-d',$date_end);
+            
+            $user =  Advanced::create([
+                'nog' => $customerArr[$i]['NOG'],                
+                'start_date' => $date_start,
+                'end_date' => $date_end,
+                'modality' => $customerArr[$i]['Modality'],
+                'category' => $customerArr[$i]['Category'],
+                'event_description' => $customerArr[$i]['Event_description'],
+                'buyer_entity' => $customerArr[$i]['Buyer_entity'],
+                'buyer_sub_entity' => $customerArr[$i]['Buyer_sub_entity'],
+                'seller' => $customerArr[$i]['Seller'],
+                'qty_of_offers' => $customerArr[$i]['Qty_of_offers'],
+                'amount' => $customerArr[$i]['Amount'],
+                'qty' => $customerArr[$i]['Qty'],
+                'unit_of_measurement' => $customerArr[$i]['Unit_of_measurement'],
+                'qty_sum' => $customerArr[$i]['Qty_sum'],
+                'bigger_than' => $customerArr[$i]['bigger_than'],
+                'days' => $customerArr[$i]['days'],
+            ]);
+            
+        }
+        
+        return response()->json([
+            'result' => $customerArr,'auth' => true
+        ]);
     }
     public function csv_filter($file, $key)
     {
